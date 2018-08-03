@@ -70,7 +70,8 @@ function displayPurchaseMenu() {
             type: "input",
             name: "id",
             validate: (name) => {
-                return name !== '';
+                let reg = RegExp(/\d+/g);
+                return reg.test(name) || "Enter a Valid ID Number";
             }
         },
         {
@@ -78,7 +79,8 @@ function displayPurchaseMenu() {
             type: "input",
             name: "units",
             validate: (name) => {
-                return name !== '';
+                let reg = RegExp(/\d+/g);
+                return reg.test(name) || "Enter a Valid ID Quantity";
             }
         }
     ])
@@ -92,13 +94,18 @@ function purchaseProduct(id,units){
         if (err)
             throw err;
 
-        if (units <= 0 || units > res[0].stock_quantity) {
-            console.log("Insufficient quantity!\n");
-            displayMainMenu();
+        if(res.length > 0) {
+            if (units <= 0 || units > res[0].stock_quantity) {
+                console.log("Insufficient quantity!\n");
+                displayMainMenu();
+            } else {
+                updateProdQuantity(id,res[0].stock_quantity-units);
+                console.log("\n%d unit(s) of %s Purchased!",units,res[0].product_name);
+                console.log("Total: $%d\n\n",(res[0].price*units));
+                displayMainMenu();
+            }
         } else {
-            updateProdQuantity(id,res[0].stock_quantity-units);
-            console.log("\n%d unit(s) of %s Purchased!",units,res[0].product_name);
-            console.log("Total: $%d\n\n",(res[0].price*units));
+            console.log("No Product by ID Found.\n\n");
             displayMainMenu();
         }
     })
