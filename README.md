@@ -3,7 +3,9 @@ Week 12 MySQL Homework Assignment
 
 ## Assignment Status
 * Challenge #1  -- Completed!
-* Challenge #2  -- N/A
-* Challenge #3  -- N/A
 
-### Recording can be found [here](https://google.com)
+### Recording can be found [here](https://drive.google.com/file/d/1-vDGrQkFyYjLwWYHR3LivUxx9NLoxAgk/view)
+
+## How to Use the App
+1. First install all dependencies: ``` npm install ```
+2. Run the App: ``` node bamazonCustomer.js ```
